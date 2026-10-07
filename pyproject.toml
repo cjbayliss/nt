@@ -1,6 +1,7 @@
 [project]
 name = "t2a"
 version = "0.1.0"
+readme = "README.md"
 description = "make text readable in terminals (normalize / fold / strict-ASCII levels)"
 requires-python = ">=3.14"
 dependencies = []
@@ -19,6 +20,11 @@ testpaths = ["tests"]
 
 [tool.mypy]
 strict = true
+warn_unreachable = true
+explicit_package_bases = true
+python_version = "3.14"
+mypy_path = ["src", "tests"]
+files = ["src", "tests"]
 
 [build-system]
 requires = ["uv_build>=0.12.23,<0.13.0"]

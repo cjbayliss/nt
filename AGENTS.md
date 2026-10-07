@@ -56,3 +56,12 @@
 ## Output
 
 - Return complete, runnable code — no placeholders, no `...`, no TODOs.
+
+## Before finishing
+
+```sh
+uv format --preview-features format-command
+uv run ruff check
+uv run mypy
+uv run pytest -q
+```
