@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from importlib.metadata import version
 from typing import TextIO
 
-from t2a.conversion import convert
+from nt.conversion import convert
 
 
 @dataclass(frozen=True)
@@ -17,7 +17,7 @@ class ConversionRequest:
 
 def build_argument_parser() -> argparse.ArgumentParser:
     argument_parser = argparse.ArgumentParser(
-        prog="t2a",
+        prog="nt",
         description=(
             "Convert text so it reads well in terminals: quotes, dashes, "
             "styled Unicode fonts, ... while keeping everything else."
@@ -68,7 +68,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     argument_parser.add_argument(
         "--version",
         action="version",
-        version=f"%(prog)s {version('t2a')}",
+        version=f"%(prog)s {version('nt')}",
     )
     return argument_parser
 
@@ -120,6 +120,6 @@ def main(command_line_arguments: list[str] | None = None) -> int:
             input_file_name, sys.stdin, sys.stdout, conversion_request
         )
         if encountered_error is not None:
-            print(f"t2a: {encountered_error}", file=sys.stderr)
+            print(f"nt: {encountered_error}", file=sys.stderr)
             return 1
     return 0

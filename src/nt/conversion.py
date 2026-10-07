@@ -4,8 +4,8 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Final
 
-from t2a.emoji import EMOJI_RUN_PATTERN
-from t2a.tables import FOLDING_TABLE, NORMALIZATION_TABLE
+from nt.emoji import EMOJI_RUN_PATTERN
+from nt.tables import FOLDING_TABLE, NORMALIZATION_TABLE
 
 
 @dataclass(frozen=True)

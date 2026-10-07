@@ -2,8 +2,8 @@ import re
 from collections.abc import Iterable
 from typing import Final
 
-from t2a.tables import EXPLICITLY_MAPPED_CODEPOINTS
-from t2a.types import CodepointIntervals
+from nt.tables import EXPLICITLY_MAPPED_CODEPOINTS
+from nt.types import CodepointIntervals
 
 EMOJI_CODEPOINT_RANGES: Final[CodepointIntervals] = (
     (0x2139, 0x2139),

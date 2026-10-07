@@ -1,3 +1,3 @@
-from t2a.cli import main
+from nt.cli import main
 
 raise SystemExit(main())

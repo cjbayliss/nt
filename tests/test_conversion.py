@@ -2,14 +2,14 @@ from typing import Any
 
 import pytest
 
-from t2a.conversion import (
+from nt.conversion import (
     DEFAULT_CONVERSION_TABLES,
     ConversionTables,
     convert,
     to_ascii,
 )
-from t2a.emoji import EMOJI_RUN_PATTERN
-from t2a.tables import FOLDING_TABLE, NORMALIZATION_TABLE
+from nt.emoji import EMOJI_RUN_PATTERN
+from nt.tables import FOLDING_TABLE, NORMALIZATION_TABLE
 
 
 def test_convert_rejects_levels_outside_zero_one_and_two() -> None:

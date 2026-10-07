@@ -2,7 +2,7 @@ from collections.abc import Iterable, Mapping
 from types import MappingProxyType
 from typing import Final
 
-from t2a.types import CodepointRunStarts
+from nt.types import CodepointRunStarts
 
 PRESENTATION_FORM_REPLACEMENTS: Final[Mapping[str, str]] = MappingProxyType(
     {

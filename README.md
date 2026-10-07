@@ -1,4 +1,4 @@
-# t2a
+# nt
 
 **NOTE:** This project is created using an LLM (mostly GLM 5.3 Flash)
 
@@ -10,7 +10,7 @@ Unicode fonts, and more — without mangling the rest of your text.
 Text copied from chat apps, word processors, and websites is full of
 typographic Unicode (“smart quotes”, em-dashes, `Ｕｎｉｃｏｄｅ`
 fullwidth letters, mathematical-alphabet fonts) that renders badly or
-searches badly in terminals and logs. `t2a` normalizes this noise while
+searches badly in terminals and logs. `nt` normalizes this noise while
 leaving ordinary text untouched, and offers progressively stricter
 levels — down to pure-ASCII output — so the same tool works for display
 cleanup, slug/filename folding, and ASCII-only pipelines.
@@ -20,37 +20,37 @@ cleanup, slug/filename folding, and ASCII-only pipelines.
 Requires [uv](https://docs.astral.sh/uv/):
 
 ```sh
-uv tool install  git+https://github.com/cjbayliss/t2a
+uv tool install  git+https://github.com/cjbayliss/nt
 ```
 
 Or run it ad hoc without installing:
 
 ```sh
-uv run t2a --help
+uv run nt --help
 ```
 
 ## Quick start
 
-`t2a` reads from stdin by default and writes to stdout:
+`nt` reads from stdin by default and writes to stdout:
 
 ```console
-$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | t2a
+$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | nt
 "Smart quotes", em-dash, café, ⅓, ﬁ, 😀 and ABC
 
-$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | t2a -l 1
+$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | nt -l 1
 "Smart quotes", em-dash, cafe, 1/3, fi, 😀 and ABC
 
-$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | t2a -l 2 -r '?'
+$ echo '“Smart quotes”, em—dash, café, ⅓, ﬁ, 😀 and ＡＢＣ' | nt -l 2 -r '?'
 "Smart quotes", em-dash, cafe, 1/3, fi, ? and ABC
 
-$ echo 'café 😀' | t2a -l 2 --keep-emoji
+$ echo 'café 😀' | nt -l 2 --keep-emoji
 cafe 😀
 ```
 
 It also accepts files (plus `-` for stdin), processed in argument order:
 
 ```sh
-t2a notes.txt - < raw_input.txt > clean.txt
+nt notes.txt - < raw_input.txt > clean.txt
 ```
 
 ## Conversion levels
@@ -64,7 +64,7 @@ t2a notes.txt - < raw_input.txt > clean.txt
 ## CLI reference
 
 ```
-t2a [FILE ...] [-l {0,1,2}] [-r TEXT] [--keep-emoji] [--version]
+nt [FILE ...] [-l {0,1,2}] [-r TEXT] [--keep-emoji] [--version]
 ```
 
 | Option            | Description                                                                  | Default   |
@@ -87,8 +87,8 @@ written).
 ## Project structure
 
 ```
-src/t2a/
-├── __main__.py    # python -m t2a entry point
+src/nt/
+├── __main__.py    # python -m nt entry point
 ├── cli.py         # argument parsing, stdin/file handling, exit codes
 ├── conversion.py  # convert(): level pipeline, emoji-run preservation
 ├── tables.py      # codepoint → replacement mapping tables

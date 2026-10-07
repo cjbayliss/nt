@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from t2a.cli import (
+from nt.cli import (
     ConversionRequest,
     build_argument_parser,
     convert_input_file,
@@ -65,7 +65,7 @@ def test_argument_parser_prints_the_version_and_exits(
     with pytest.raises(SystemExit) as raised_system_exit:
         build_argument_parser().parse_args(["--version"])
     assert raised_system_exit.value.code == 0
-    assert capsys.readouterr().out == f"t2a {installed_package_version('t2a')}\n"
+    assert capsys.readouterr().out == f"nt {installed_package_version('nt')}\n"
 
 
 def test_convert_stream_lines_writes_converted_lines_to_the_output_stream() -> None:
@@ -181,7 +181,7 @@ def test_main_converts_files_before_a_missing_one_and_then_stops(
     assert exit_code == 1
     assert captured_output.out == "OK\n"
     assert "missing.txt" in captured_output.err
-    assert captured_output.err.startswith("t2a: ")
+    assert captured_output.err.startswith("nt: ")
 
 
 def test_main_version_exits_zero_without_converting_input(
@@ -191,12 +191,12 @@ def test_main_version_exits_zero_without_converting_input(
     with pytest.raises(SystemExit) as raised_system_exit:
         main(["--version"])
     assert raised_system_exit.value.code == 0
-    assert capsys.readouterr().out == f"t2a {installed_package_version('t2a')}\n"
+    assert capsys.readouterr().out == f"nt {installed_package_version('nt')}\n"
 
 
 def test_module_entry_point_converts_stdin_in_a_real_process() -> None:
     completed_process = subprocess.run(
-        [sys.executable, "-m", "t2a", "-l", "1", "--keep-emoji"],
+        [sys.executable, "-m", "nt", "-l", "1", "--keep-emoji"],
         input="Café ☕ «ɣ»\n",
         capture_output=True,
         text=True,

@@ -1,6 +1,6 @@
 from types import MappingProxyType
 
-from t2a.tables import (
+from nt.tables import (
     ENCLOSED_NEGATIVE_LETTER_RUN_STARTS,
     EXPLICITLY_MAPPED_CODEPOINTS,
     FOLDING_TABLE,

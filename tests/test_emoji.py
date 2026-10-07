@@ -1,13 +1,13 @@
 from typing import Any
 
-from t2a.emoji import (
+from nt.emoji import (
     EMOJI_CODEPOINT_RANGES,
     EMOJI_MAPPED_CODEPOINTS,
     EMOJI_RUN_PATTERN,
     codepoint_intervals_as_character_class,
     codepoints_as_character_class,
 )
-from t2a.tables import EXPLICITLY_MAPPED_CODEPOINTS
+from nt.tables import EXPLICITLY_MAPPED_CODEPOINTS
 
 
 def emoji_pattern_groupdict(text: str) -> dict[str, Any]:
