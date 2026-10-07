@@ -1,0 +1,25 @@
+[project]
+name = "t2a"
+version = "0.1.0"
+description = "make text readable in terminals (normalize / fold / strict-ASCII levels)"
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+t2a = "t2a.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18",
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+strict = true
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"
