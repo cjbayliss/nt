@@ -131,8 +131,9 @@ def test_normalization_and_folding_tables_are_read_only_proxies() -> None:
 
 
 def test_explicitly_mapped_codepoints_unite_both_tables() -> None:
-    assert EXPLICITLY_MAPPED_CODEPOINTS == frozenset(NORMALIZATION_TABLE) | frozenset(
-        FOLDING_TABLE
+    assert (
+        frozenset(NORMALIZATION_TABLE) | frozenset(FOLDING_TABLE)
+        == EXPLICITLY_MAPPED_CODEPOINTS
     )
     assert 0x2019 in EXPLICITLY_MAPPED_CODEPOINTS
     assert 0x27A1 in EXPLICITLY_MAPPED_CODEPOINTS

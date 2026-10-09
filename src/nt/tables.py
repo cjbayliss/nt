@@ -247,7 +247,7 @@ def fullwidth_alphanumeric_replacements(
 def unicode_space_replacements(
     space_codepoints: Iterable[int],
 ) -> dict[int, str]:
-    return {codepoint: " " for codepoint in space_codepoints}
+    return dict.fromkeys(space_codepoints, " ")
 
 
 def enclosed_number_replacements(

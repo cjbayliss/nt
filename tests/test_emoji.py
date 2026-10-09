@@ -39,10 +39,13 @@ def test_emoji_codepoint_ranges_are_sorted_and_non_overlapping() -> None:
 
 
 def test_emoji_mapped_codepoints_are_mapped_codepoints_inside_emoji_ranges() -> None:
-    assert EMOJI_MAPPED_CODEPOINTS == frozenset(
-        codepoint
-        for codepoint in EXPLICITLY_MAPPED_CODEPOINTS
-        if any(start <= codepoint <= end for start, end in EMOJI_CODEPOINT_RANGES)
+    assert (
+        frozenset(
+            codepoint
+            for codepoint in EXPLICITLY_MAPPED_CODEPOINTS
+            if any(start <= codepoint <= end for start, end in EMOJI_CODEPOINT_RANGES)
+        )
+        == EMOJI_MAPPED_CODEPOINTS
     )
     assert 0x27A1 in EMOJI_MAPPED_CODEPOINTS
     assert 0x1F600 not in EMOJI_MAPPED_CODEPOINTS

@@ -91,12 +91,8 @@ def convert_pattern_match(
     matched_groups = pattern_match.groupdict()
     emoji_run = matched_groups["emoji_run"]
     single_character = matched_groups["single_character"]
-    return (
-        emoji_run
-        if emoji_run
-        else convert_without_emoji_preservation(
-            single_character, conversion_tables, level, replacement
-        )
+    return emoji_run or convert_without_emoji_preservation(
+        single_character, conversion_tables, level, replacement
     )
 
 
