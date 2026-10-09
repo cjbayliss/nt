@@ -3,7 +3,7 @@ name = "nt"
 description = "make text readable in terminals (normalize / fold / strict-ASCII levels)"
 readme = "README.md"
 requires-python = ">=3.14"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = []
 
 [dependency-groups]
