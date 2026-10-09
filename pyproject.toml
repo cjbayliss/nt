@@ -25,6 +25,7 @@ addopts = "--cov=nt --cov-report=term-missing --cov-fail-under=99"
 
 [tool.coverage.run]
 branch = true
+disable_warnings = ["module-not-measured"]
 
 [tool.coverage.report]
 exclude_lines = ["assert_never", "\\(Protocol\\)", "if __name__ == .__main__.:"]
