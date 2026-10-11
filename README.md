@@ -24,7 +24,7 @@ uv run nt --help
 
 ## Requirements
 
-- Python **3.14+**
+- Python **3.15+**
 - No runtime dependencies
 
 ## Usage
