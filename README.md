@@ -4,8 +4,8 @@
 
 `nt` converts Unicode text so it reads well in a terminal: curly quotes, en/em
 dashes, ellipses, styled "fake font" letters (𝐛𝐨𝐥𝐝, 𝔤𝔬𝔱𝔥𝔦𝔠, ＡＢＣ), ligatures,
-accents, and more are mapped to clean ASCII equivalents — while everything else
-is left untouched.
+accents, arrows, box-drawing lines, and more are mapped to clean ASCII
+equivalents — while everything else is left untouched.
 
 
 ## Installation
@@ -52,7 +52,7 @@ $ echo 'café — “x”… ﬁn' | nt
 café - "x"... fin
 
 # Level 1 — fold: additionally strip accents and fold ligatures,
-# fractions, numerals, and symbols towards ASCII.
+# fractions, numerals, symbols, box-drawing lines, and shapes towards ASCII.
 $ echo 'café — “x”… ﬁn' | nt -l 1
 cafe - "x"... fin
 

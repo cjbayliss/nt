@@ -147,6 +147,29 @@ ASCII_FOLDING_REPLACEMENTS: Final[Mapping[str, str]] = MappingProxyType(
         "⬅": "<-",
         "⬆": "^",
         "⬇": "v",
+        "▲": "^",
+        "△": "^",
+        "▴": "^",
+        "▵": "^",
+        "▼": "v",
+        "▽": "v",
+        "▾": "v",
+        "▿": "v",
+        "▶": ">",
+        "▷": ">",
+        "▸": ">",
+        "▹": ">",
+        "◀": "<",
+        "◁": "<",
+        "◂": "<",
+        "◃": "<",
+        "○": "o",
+        "◉": "o",
+        "◎": "o",
+        "●": "o",
+        "◯": "o",
+        "◆": "*",
+        "◇": "*",
     }
 )
 
@@ -183,6 +206,39 @@ UNICODE_SPACE_CODEPOINTS: Final[tuple[int, ...]] = (
 )
 DINGBAT_CIRCLED_NUMBER_RUN_START: Final[int] = 0x2776
 NEGATIVE_CIRCLED_NUMBER_RUN_START: Final[int] = 0x24EB
+BOX_DRAWING_HORIZONTAL_LINE_CODEPOINT_RANGES: Final[tuple[range, ...]] = (
+    range(0x2500, 0x2502),
+    range(0x2504, 0x2506),
+    range(0x2508, 0x250A),
+    range(0x254C, 0x254E),
+    range(0x2574, 0x2575),
+    range(0x2576, 0x2577),
+    range(0x2578, 0x2579),
+    range(0x257A, 0x257B),
+    range(0x257C, 0x257D),
+    range(0x257E, 0x257F),
+)
+BOX_DRAWING_VERTICAL_LINE_CODEPOINT_RANGES: Final[tuple[range, ...]] = (
+    range(0x2502, 0x2504),
+    range(0x2506, 0x2508),
+    range(0x250A, 0x250C),
+    range(0x254E, 0x2550),
+    range(0x2551, 0x2552),
+    range(0x2575, 0x2576),
+    range(0x2577, 0x2578),
+    range(0x2579, 0x257A),
+    range(0x257B, 0x257C),
+    range(0x257D, 0x257E),
+    range(0x257F, 0x2580),
+)
+BOX_DRAWING_CORNER_AND_JUNCTION_CODEPOINT_RANGES: Final[tuple[range, ...]] = (
+    range(0x250C, 0x254C),
+    range(0x2552, 0x2571),
+)
+BOX_DRAWING_DOUBLE_HORIZONTAL_CODEPOINT: Final[int] = 0x2550
+BOX_DRAWING_ASCENDING_DIAGONAL_CODEPOINT: Final[int] = 0x2571
+BOX_DRAWING_DESCENDING_DIAGONAL_CODEPOINT: Final[int] = 0x2572
+BOX_DRAWING_DIAGONAL_CROSS_CODEPOINT: Final[int] = 0x2573
 
 
 def replacements_keyed_by_codepoint(
@@ -263,6 +319,37 @@ def enclosed_number_replacements(
     }
 
 
+def replacements_for_codepoint_ranges(
+    codepoint_ranges: Iterable[range],
+    replacement: str,
+) -> dict[int, str]:
+    return {
+        codepoint: replacement
+        for codepoint_range in codepoint_ranges
+        for codepoint in codepoint_range
+    }
+
+
+def box_drawing_replacements() -> dict[int, str]:
+    return (
+        replacements_for_codepoint_ranges(
+            BOX_DRAWING_HORIZONTAL_LINE_CODEPOINT_RANGES, "-"
+        )
+        | replacements_for_codepoint_ranges(
+            BOX_DRAWING_VERTICAL_LINE_CODEPOINT_RANGES, "|"
+        )
+        | replacements_for_codepoint_ranges(
+            BOX_DRAWING_CORNER_AND_JUNCTION_CODEPOINT_RANGES, "+"
+        )
+        | {
+            BOX_DRAWING_DOUBLE_HORIZONTAL_CODEPOINT: "=",
+            BOX_DRAWING_ASCENDING_DIAGONAL_CODEPOINT: "/",
+            BOX_DRAWING_DESCENDING_DIAGONAL_CODEPOINT: "\\",
+            BOX_DRAWING_DIAGONAL_CROSS_CODEPOINT: "x",
+        }
+    )
+
+
 NORMALIZATION_TABLE: Final[Mapping[int, str]] = MappingProxyType(
     {
         **replacements_keyed_by_codepoint(PRESENTATION_FORM_REPLACEMENTS),
@@ -285,6 +372,7 @@ FOLDING_TABLE: Final[Mapping[int, str]] = MappingProxyType(
             DINGBAT_CIRCLED_NUMBER_RUN_START,
             NEGATIVE_CIRCLED_NUMBER_RUN_START,
         ),
+        **box_drawing_replacements(),
     }
 )
 

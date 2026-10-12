@@ -85,6 +85,41 @@ def test_level_one_folds_comparison_and_arrow_symbols() -> None:
     assert convert("← → ↔ ⇒", level=1) == "<- -> <-> =>"
 
 
+def test_level_one_folds_box_drawing_lines_corners_and_arcs_to_ascii() -> None:
+    assert convert("│ ─ └── ═ ║", level=1) == "| - +-- = |"
+    assert convert("╭─┬─╮\n│ │\n╰─┴─╯", level=1) == "+-+-+\n| |\n+-+-+"
+
+
+def test_level_one_folds_geometric_triangles_circles_and_diamonds() -> None:
+    assert convert("▲ △ ▴ ▵", level=1) == "^ ^ ^ ^"
+    assert convert("▼ ▽ ▾ ▿", level=1) == "v v v v"
+    assert convert("▶ ▷ ▸ ▹ ◀ ◁ ◂ ◃", level=1) == "> > > > < < < <"
+    assert convert("● ○ ◉ ◎ ◯ ◆ ◇", level=1) == "o o o o o * *"
+
+
+def test_level_zero_leaves_box_drawing_characters_alone() -> None:
+    assert convert("│ ▼ ─ └ ▲") == "│ ▼ ─ └ ▲"
+
+
+def test_level_two_preserves_diagram_structure_drawn_with_box_drawing_characters() -> (
+    None
+):
+    diagram_text = (
+        "   │  typed facades (chat, ...)\n"
+        "   ▼\n"
+        "Client / capability facades ── retries, result wrapping (boundary)\n"
+        "   ▲\n"
+        "   └── pure core: spec values -> encode/decode"
+    )
+    assert convert(diagram_text, level=2) == (
+        "   |  typed facades (chat, ...)\n"
+        "   v\n"
+        "Client / capability facades -- retries, result wrapping (boundary)\n"
+        "   ^\n"
+        "   +-- pure core: spec values -> encode/decode"
+    )
+
+
 def test_level_two_drops_unmapped_non_ascii_characters_by_default() -> None:
     assert convert("Grüße aus München", level=2) == "Grusse aus Munchen"
     assert convert("日本語テキスト", level=2) == ""
@@ -146,6 +181,8 @@ def test_explicitly_mapped_emoji_lookalikes_are_converted_not_kept() -> None:
     assert convert("➡", level=1, keep_emoji=True) == "->"
     assert convert("➖", level=0, keep_emoji=True) == "-"
     assert convert("➡😀", level=1, keep_emoji=True) == "->😀"
+    assert convert("▶", level=1, keep_emoji=True) == ">"
+    assert convert("◀😀", level=1, keep_emoji=True) == "<😀"
 
 
 def test_mapped_characters_inside_an_emoji_run_are_kept_verbatim() -> None:
